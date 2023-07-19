@@ -1,0 +1,25 @@
+.popup__close-btn {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  background: url(../../../images/closeButton.svg);
+  border: none;
+  min-width: 32px;
+  min-height: 32px;
+  padding: 0;
+}
+
+.popup__close-btn:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+@media (max-width: 603px) {
+  .popup__close-btn {
+    top: -36px;
+    right: 0;
+    min-width: 20px;
+    min-height: 20px;
+    background-size: contain;
+  }
+}

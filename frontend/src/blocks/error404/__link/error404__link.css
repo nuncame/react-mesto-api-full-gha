@@ -1,0 +1,11 @@
+.error404__link {
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ffffff;
+}
+
+.error404__link:hover {
+  opacity: 0.6;
+}

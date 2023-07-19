@@ -1,0 +1,7 @@
+.popup__container_type_image {
+  max-width: unset;
+  max-height: unset;
+  min-height: unset;
+  background: none;
+  display: flex;
+}
