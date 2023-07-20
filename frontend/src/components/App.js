@@ -47,6 +47,7 @@ function App() {
     mestoAuth
       .login(email, password)
       .then((data) => {
+        console.log(data);
         setUserEmail(email);
         localStorage.setItem("token", data.token);
         setLoggedIn(true);
@@ -58,29 +59,30 @@ function App() {
       });
   }
 
-  const checkToken = () => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      mestoAuth
-        .getContent(token)
-        .then((data) => {
-          if (data) {
-            setLoggedIn(true);
-            setUserEmail(data.data.email);
-            navigate("/", { replace: true });
-          } else {
-            setLoggedIn(false);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  };
-
   useEffect(() => {
+    const checkToken = () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        mestoAuth
+          .getContent(token)
+          .then((data) => {
+            if (data) {
+              setLoggedIn(true);
+              setUserEmail(data.email);
+              navigate("/", { replace: true });
+            } else {
+              setLoggedIn(false);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    };
     checkToken();
   }, []);
+
+  
 
   function signOut() {
     localStorage.removeItem("token");
@@ -93,6 +95,7 @@ function App() {
         .then(([userData, initialCards]) => {
           setCurrentUser(userData);
           setCards(initialCards);
+          console.log(cards);
         })
         .catch((err) => {
           console.log(err);
@@ -110,7 +113,9 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => {
+      return i === currentUser._id
+    });
 
     api
       .changeLikeCardStatus(card._id, isLiked)

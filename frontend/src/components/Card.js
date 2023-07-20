@@ -3,9 +3,10 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 export default function Card(props) {
   const userData = useContext(CurrentUserContext);
-
-  const isOwn = props.card.owner._id === userData._id;
-  const isLiked = props.card.likes.some((i) => i._id === userData._id);
+  console.log(props);
+  const isOwn = props.card.owner === userData._id;
+  const isLiked = props.card.likes.some((i) => {
+    return i === userData._id});
 
   const elementLikeButtonClassName = `element__like ${
     isLiked && "element__like_active"
