@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = 'super-secret-key';
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 const createToken = (id) => {
-  const token = jwt.sign({ id }, JWT_SECRET, { expiresIn: '7d' });
-  return { token };
+  const token = jwt.sign({ id }, NODE_ENV === 'production' ? JWT_SECRET : 'super-secret-key', { expiresIn: '7d' });
+  return token;
 };
 
 const verifyToken = (token) => {

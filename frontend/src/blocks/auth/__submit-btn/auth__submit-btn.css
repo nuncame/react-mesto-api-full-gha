@@ -7,3 +7,8 @@
   line-height: 22px;
   text-align: center;
 }
+
+.auth__submit-btn:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}

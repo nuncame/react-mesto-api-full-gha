@@ -1,6 +1,6 @@
 .popup__tooltip-text {
   max-width: 358px;
-  margin: 0 auto;
+  margin: 0 auto 60px;
   text-align: center;
   font-weight: 900;
   font-size: 24px;

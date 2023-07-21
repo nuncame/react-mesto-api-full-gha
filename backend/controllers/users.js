@@ -47,8 +47,11 @@ const login = (req, res, next) => {
         if (!passwordMatch) {
           return next(new UnauthorizedError('Неправильные почта или пароль'));
         }
-        const token = createToken(user._id);
-        return res.status(200).send(token);
+        const jwt = createToken(user._id);
+        const { name, about, avatar } = user;
+        return res.status(200).send({
+          name, about, avatar, token: jwt,
+        });
       });
       return false;
     })

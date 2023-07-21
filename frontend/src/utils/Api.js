@@ -79,9 +79,9 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: "http://localhost:4000/",
+  baseUrl: "http://api.mesto-nuncame.nomoredomains.xyz/",
   headers: {
-    Authorization: `Bearer ${localStorage.token}`,
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
     "Content-Type": "application/json",
   },
 });

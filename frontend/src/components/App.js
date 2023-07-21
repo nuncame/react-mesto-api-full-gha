@@ -47,9 +47,9 @@ function App() {
     mestoAuth
       .login(email, password)
       .then((data) => {
-        console.log(data);
         setUserEmail(email);
         localStorage.setItem("token", data.token);
+        setCurrentUser(data);
         setLoggedIn(true);
         navigate("/");
       })
@@ -86,6 +86,7 @@ function App() {
 
   function signOut() {
     localStorage.removeItem("token");
+    setCurrentUser({});
     navigate("/login");
   }
 
@@ -95,7 +96,6 @@ function App() {
         .then(([userData, initialCards]) => {
           setCurrentUser(userData);
           setCards(initialCards);
-          console.log(cards);
         })
         .catch((err) => {
           console.log(err);

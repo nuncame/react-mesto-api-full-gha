@@ -3,3 +3,7 @@
     border: none;
     padding: 0;
 }
+
+.header__logout-btn:hover {
+    cursor: pointer;
+}
