@@ -5,7 +5,7 @@ const ForbiddenError = require('../errors/forbidden-err');
 const authorize = (req, res, next) => {
   const { authorization } = req.headers;
   if (!authorization || !authorization.startsWith('Bearer ')) {
-    next(new UnauthorizedError('Необходима авторизация'));
+    return new UnauthorizedError('Необходима авторизация');
   }
   let payload;
 

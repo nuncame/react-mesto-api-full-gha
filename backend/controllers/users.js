@@ -12,18 +12,14 @@ const createUser = (req, res, next) => {
   } = req.body;
   bcrypt
     .hash(password, 10)
-    .then((hash) => {
-      return User.create({
-        name, about, avatar, email, password: hash,
-      });
-    })
-    .then((user) => {
-      return res
-        .status(201)
-        .send({
-          name: user.name, about: user.about, avatar: user.avatar, email: user.email, _id: user._id,
-        });
-    })
+    .then((hash) => User.create({
+      name, about, avatar, email, password: hash,
+    }))
+    .then((user) => res
+      .status(201)
+      .send({
+        name: user.name, about: user.about, avatar: user.avatar, email: user.email, _id: user._id,
+      }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         return next(new BadRequestError('Переданы некорректные данные при создании пользователя.'));
@@ -60,22 +56,15 @@ const login = (req, res, next) => {
 
 const getUsers = (req, res, next) => {
   User.find({})
-    .then((data) => { return res.status(200).send(data); })
+    .then((data) => res.status(200).send(data))
     .catch(next);
 };
 
 const getCurrentUser = (req, res, next) => {
   const currentUser = req.user.id.toString();
   return User.findById(currentUser)
-    .then((user) => {
-      return res.status(200).send(user);
-    })
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        return next(new BadRequestError('Переданы некорректные данные при поиске пользователя.'));
-      }
-      return next(err);
-    });
+    .then((user) => res.status(200).send(user))
+    .catch(next);
 };
 
 const getUserById = (req, res, next) => {

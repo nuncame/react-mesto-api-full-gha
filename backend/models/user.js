@@ -15,15 +15,15 @@ const userSchema = new mongoose.Schema({
     default: 'Исследователь',
   },
   avatar: {
-    type: String,
+    type: mongoose.SchemaTypes.Url,
     default: 'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
-    validate: (data) => { return validator.isURL(data, { protocols: ['http', 'https'], require_tld: false, require_protocol: true }); },
+    validate: (data) => validator.isURL(data, { protocols: ['http', 'https'], require_tld: false, require_protocol: true }),
   },
   email: {
     type: String,
     required: true,
     unique: true,
-    validate: (data) => { return validator.isEmail(data); },
+    validate: (data) => validator.isEmail(data),
   },
   password: {
     type: String,
